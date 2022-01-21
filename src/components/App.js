@@ -1,10 +1,14 @@
+import { BrowserRouter } from "react-router-dom";
+
 import Nav from "./layouts/Nav";
+import Main from "./layouts/Main";
 
 function App() {
   return (
-    <div className="App">
+    <BrowserRouter>
       <Nav />
-    </div>
+      <Main />
+    </BrowserRouter>
   );
 }
 
