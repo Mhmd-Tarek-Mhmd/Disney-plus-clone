@@ -3,23 +3,11 @@ import styled from "styled-components";
 import Carousel from "./Carousel";
 import CardsGroup from "./CardsGroup";
 
-const ViewersGroup = styled(CardsGroup)`
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-`;
-const MoviesGroup = styled(CardsGroup)`
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-`;
-const Title = styled.h2`
-  @media (max-width: 589px) {
-    text-align: center;
-  }
-`;
-
 export default function Home() {
   const cards = ["disney", "marvel", "national", "pixar", "starwars"];
 
   return (
-    <>
+    <Container className="container">
       <Carousel />
 
       <ViewersGroup>
@@ -65,6 +53,29 @@ export default function Home() {
           ))}
         </MoviesGroup>
       </section>
-    </>
+    </Container>
   );
 }
+
+const Container = styled.div`
+  overflow-x: hidden;
+  &::before {
+    background: url(/assists/images/bg/home.png) top center / cover no-repeat
+      fixed;
+  }
+  & > * {
+    margin-bottom: 30px;
+  }
+`;
+
+const ViewersGroup = styled(CardsGroup)`
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+`;
+const MoviesGroup = styled(CardsGroup)`
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+`;
+const Title = styled.h2`
+  @media (max-width: 589px) {
+    text-align: center;
+  }
+`;

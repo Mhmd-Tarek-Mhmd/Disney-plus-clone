@@ -18,9 +18,11 @@ export default function Nav() {
     if (list.current.classList.contains("mobile-links")) {
       e.target.ariaLabel = "Hide Links";
       list.current.classList.remove("mobile-links");
+      list.current.parentElement.style.borderBottom = "none";
     } else {
       e.target.ariaLabel = "Show Links";
       list.current.classList.add("mobile-links");
+      list.current.parentElement.style.borderBottom = "2px solid white";
     }
   };
 

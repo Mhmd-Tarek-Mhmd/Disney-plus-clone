@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const breakPoint = 900;
-const bgc = '#090b13'
+const bgc = "#090b13";
 
 export const Navigation = styled.nav`
   padding: 0 24px;
@@ -11,7 +11,6 @@ export const Navigation = styled.nav`
 
   @media (max-width: ${breakPoint}px) {
     justify-content: space-between;
-    border-bottom: 2px solid white;
 
     .links-toggler {
       font-size: 25px;
@@ -45,11 +44,12 @@ export const Links = styled.ul`
   @media (max-width: ${breakPoint}px) {
     display: none;
     &.mobile-links {
+      left: 0;
+      right: 0;
+      z-index: 1;
       display: grid;
       position: absolute;
       top: calc(100% + 2px);
-      left: 0;
-      right: 0;
       background-color: black;
 
       a {
