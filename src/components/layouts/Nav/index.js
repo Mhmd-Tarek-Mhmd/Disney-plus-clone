@@ -1,10 +1,18 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-import { Navigation, Links } from "./styles";
+import Logo from "./Logo";
+import { Navigation, Links, LoginBtn } from "./styles";
 
 export default function Nav() {
-  const list = React.useRef();
+  const [isAuthed, setIsAuthed] = React.useState(false);
+  const navigate = useNavigate();
+  React.useEffect(
+    () => (!isAuthed ? navigate("/login") : navigate("/")),
+    [isAuthed]
+  );
 
+  const list = React.useRef();
   const linksText = [
     "home",
     "search",
@@ -28,40 +36,43 @@ export default function Nav() {
 
   return (
     <Navigation className="middle-flex">
-      <button
-        aria-label="show links"
-        onClick={(e) => handleToggle(e)}
-        className="links-toggler"
-      >
-        ≡
-      </button>
+      {isAuthed ? (
+        <>
+          <button
+            aria-label="show links"
+            onClick={(e) => handleToggle(e)}
+            className="links-toggler"
+          >
+            ≡
+          </button>
 
-      <a href="/">
-        <img
-          src="/assists/images/logo.svg"
-          alt="Disney logo"
-          className="logo"
-        />
-      </a>
+          <Logo />
 
-      <Links className="links middle-flex" ref={list}>
-        {linksText.map((link) => (
-          <li key={link}>
-            <a href="/" className="middle-flex">
-              <img src={`/assists/images/icons/${link}-icon.svg`} alt="" />
-              <span>{link.toUpperCase()}</span>
-            </a>
-          </li>
-        ))}
-      </Links>
+          <Links className="links middle-flex" ref={list}>
+            {linksText.map((link) => (
+              <li key={link}>
+                <a href="/" className="middle-flex">
+                  <img src={`/assists/images/icons/${link}-icon.svg`} alt="" />
+                  <span>{link.toUpperCase()}</span>
+                </a>
+              </li>
+            ))}
+          </Links>
 
-      <a href="/">
-        <img
-          src="/assists/images/authed-user.png"
-          alt="User pic"
-          className="authed-user"
-        />
-      </a>
+          <button aria-label="Logout" onClick={() => setIsAuthed(false)}>
+            <img
+              src="/assists/images/authed-user.png"
+              alt="User pic"
+              className="authed-user"
+            />
+          </button>
+        </>
+      ) : (
+        <>
+          <Logo />
+          <LoginBtn onClick={() => setIsAuthed(true)}>Login</LoginBtn>
+        </>
+      )}
     </Navigation>
   );
 }

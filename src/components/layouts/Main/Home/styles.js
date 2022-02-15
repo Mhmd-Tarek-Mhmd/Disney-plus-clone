@@ -1,12 +1,22 @@
 import styled from "styled-components";
 
+const Container = styled.div`
+  overflow-x: hidden;
+  &::before {
+    background: url(/assists/images/bg/home.png) top center / cover no-repeat
+      fixed;
+  }
+  & > * {
+    margin-bottom: 30px;
+  }
+`;
+
 const CardsGroup = styled.div`
   display: grid;
   grid-gap: 25px;
   padding: 30px 0 26px;
 
   .card {
-    //padding: 10px;
     border-radius: 10px;
     border: 3px solid rgba(249, 249, 249, 0.1);
     transition: all 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
@@ -28,4 +38,16 @@ const CardsGroup = styled.div`
   }
 `;
 
-export default CardsGroup;
+const ViewersGroup = styled(CardsGroup)`
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+`;
+const MoviesGroup = styled(CardsGroup)`
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+`;
+const Title = styled.h2`
+  @media (max-width: 589px) {
+    text-align: center;
+  }
+`;
+
+export { Container, ViewersGroup, MoviesGroup, Title };

@@ -8,22 +8,14 @@ export const Navigation = styled.nav`
   min-height: 70px;
   position: relative;
   background-color: ${bgc};
+  justify-content: space-between;
 
-  @media (max-width: ${breakPoint}px) {
-    justify-content: space-between;
-
-    .links-toggler {
+  .links-toggler {
+    @media (max-width: ${breakPoint}px) {
       font-size: 25px;
       transform: scaleX(1.5);
     }
-  }
-
-  .logo {
-    width: 80px;
-  }
-
-  @media (min-width: ${breakPoint + 1}px) {
-    .links-toggler {
+    @media (min-width: ${breakPoint + 1}px) {
       display: none;
     }
   }
@@ -37,9 +29,7 @@ export const Navigation = styled.nav`
 
 export const Links = styled.ul`
   flex: 1;
-  @media (min-width: ${breakPoint + 1}px) {
-    margin-left: 25px;
-  }
+  justify-content: center;
 
   @media (max-width: ${breakPoint}px) {
     display: none;
@@ -98,5 +88,20 @@ export const Links = styled.ul`
         }
       }
     }
+  }
+`;
+
+export const LoginBtn = styled.button`
+  padding: 8px 16px;
+  border-radius: 4px;
+  letter-spacing: 1.5px;
+  border: 1px solid #f9f9f9;
+  text-transform: uppercase;
+  transition: 0.2s ease-in-out 0s;
+  background-color: rgba(0, 0, 0, 0.6);
+  will-change: color, background-color;
+  &:hover {
+    color: #000;
+    background-color: #f9f9f9;
   }
 `;
