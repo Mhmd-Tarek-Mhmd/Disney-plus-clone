@@ -1,6 +1,6 @@
 # Disney plus clone
 
-- Live Site [URL]()
+- Live Site [URL](https://elated-lalande-8bea59.netlify.app)
 
 ## Credits
 
