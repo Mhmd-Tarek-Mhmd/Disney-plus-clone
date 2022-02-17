@@ -40,6 +40,26 @@ const CardsGroup = styled.div`
 
 const ViewersGroup = styled(CardsGroup)`
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+
+  .card {
+    position: relative;
+
+    & > * {
+      pointer-events: none;
+    }
+  }
+
+  video {
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    will-change: display;
+    border-radius: inherit;
+    &:not(.active) {
+      display: none;
+    }
+  }
 `;
 const MoviesGroup = styled(CardsGroup)`
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));

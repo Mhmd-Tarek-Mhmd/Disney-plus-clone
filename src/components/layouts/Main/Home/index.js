@@ -7,18 +7,17 @@ import { handleGetMovies } from "../../../../store/actions";
 import { Container, Title, ViewersGroup, MoviesGroup } from "./styles";
 import Carousel from "./Carousel";
 
-function Home({
-  movies,
-  recommend,
-  newMovies,
-  trending,
-  original,
-  handleGetMovies,
-}) {
+function Home({ movies, handleGetMovies }) {
   const cards = ["disney", "marvel", "national", "pixar", "starwars"];
   React.useEffect(handleGetMovies, [handleGetMovies]);
 
-  console.log();
+  const handleMouseEnter = (e) => {
+    e.target.firstElementChild.classList.add("active");
+    e.target.firstElementChild.play();
+  };
+  const handleMouseLeave = (e) => {
+    e.target.firstElementChild.classList.remove("active");
+  };
 
   return (
     <Container className="container">
@@ -26,7 +25,15 @@ function Home({
 
       <ViewersGroup>
         {cards.map((card) => (
-          <div className="card" key={card}>
+          <div
+            className="card"
+            key={card}
+            onMouseEnter={(e) => handleMouseEnter(e)}
+            onMouseLeave={(e) => handleMouseLeave(e)}
+          >
+            <video>
+              <source src={`/assists/videos/${card}.mp4`} type="video/mp4" />
+            </video>
             <img src={`/assists/images/viewers/${card}.png`} alt={card} />
           </div>
         ))}
@@ -54,81 +61,13 @@ function Home({
             </MoviesGroup>
           </section>
         ))}
-
-      {/* <section className="recommend">
-        <Title>Recommended for you</Title>
-
-        <MoviesGroup>
-          {recommend &&
-            recommend.map((movie) => (
-              <Link
-                to={`/movie/${movie.title.toLowerCase().replaceAll(" ", "-")}`}
-                className="card"
-                key={movie.title}
-              >
-                <img src={movie.cardImg} alt={`${movie.title} movie`} />
-              </Link>
-            ))}
-        </MoviesGroup>
-      </section>
-
-       <section className="new">
-        <Title>New</Title>
-
-        <MoviesGroup>
-          {newMovies &&
-            newMovies.map((card) => (
-              <Link to="/movie" className="card" key={card}>
-                <img src={`/assists/images/viewers/${card}.png`} alt={card} />
-              </Link>
-            ))}
-        </MoviesGroup>
-      </section>
-
-      <section className="trending">
-        <Title>Trending</Title>
-
-        <MoviesGroup>
-          {trending &&
-            trending.map((card) => (
-              <Link to="/movie" className="card" key={card}>
-                <img src={`/assists/images/viewers/${card}.png`} alt={card} />
-              </Link>
-            ))}
-        </MoviesGroup>
-      </section>
-
-      <section className="original">
-        <Title>Originals</Title>
-
-        <MoviesGroup>
-          {original &&
-            original.map((card) => (
-              <Link to="/movie" className="card" key={card}>
-                <img src={`/assists/images/viewers/${card}.png`} alt={card} />
-              </Link>
-            ))}
-        </MoviesGroup> 
-      </section> */}
     </Container>
   );
 }
 
 export default connect(
-  (state) => {
-    const { movies } = state;
-    return { movies };
-    /*const recommend = movies.filter((movie) => movie.type === "recommend");
-    const newMovies = movies.filter((movie) => movie.type === "new");
-    const trending = movies.filter((movie) => movie.type === "trending");
-    const original = movies.filter((movie) => movie.type === "original");*/
-
-    /*return {
-      recommend,
-      newMovies,
-      trending,
-      original,
-    };*/
-  },
+  (state) => ({
+    movies: state.movies,
+  }),
   { handleGetMovies }
 )(Home);
