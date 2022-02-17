@@ -45,6 +45,7 @@ const MoviesGroup = styled(CardsGroup)`
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 `;
 const Title = styled.h2`
+  text-transform: capitalize;
   @media (max-width: 589px) {
     text-align: center;
   }

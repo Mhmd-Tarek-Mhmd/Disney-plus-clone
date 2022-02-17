@@ -1,15 +1,17 @@
 import React from "react";
+import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
+
+import { signIn, signOut } from "../../../store/actions";
 
 import Logo from "./Logo";
 import { Navigation, Links, LoginBtn } from "./styles";
 
-export default function Nav() {
-  const [isAuthed, setIsAuthed] = React.useState(false);
+function Nav({ isAuthed, signIn, signOut }) {
   const navigate = useNavigate();
   React.useEffect(
     () => (!isAuthed ? navigate("/login") : navigate("/")),
-    [isAuthed]
+    [isAuthed, navigate]
   );
 
   const list = React.useRef();
@@ -59,7 +61,7 @@ export default function Nav() {
             ))}
           </Links>
 
-          <button aria-label="Logout" onClick={() => setIsAuthed(false)}>
+          <button aria-label="Logout" onClick={signOut}>
             <img
               src="/assists/images/authed-user.png"
               alt="User pic"
@@ -70,9 +72,14 @@ export default function Nav() {
       ) : (
         <>
           <Logo />
-          <LoginBtn onClick={() => setIsAuthed(true)}>Login</LoginBtn>
+          <LoginBtn onClick={signIn}>Login</LoginBtn>
         </>
       )}
     </Navigation>
   );
 }
+
+export default connect((state) => ({ isAuthed: state.auth }), {
+  signIn,
+  signOut,
+})(Nav);

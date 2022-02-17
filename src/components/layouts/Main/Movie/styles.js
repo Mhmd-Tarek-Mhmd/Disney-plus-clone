@@ -4,13 +4,10 @@ const Container = styled.div`
   .img-title {
     width: 35vw;
     height: 30vh;
-    min-width: 200px;
-    min-height: 170px;
+    margin-bottom: 20px;
 
     img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
+      width: 250px;
     }
   }
 
@@ -40,12 +37,13 @@ const Container = styled.div`
     }
 
     .round-btn {
-      width: 44px;
-      height: 44px;
+      width: 48px;
+      height: 48px;
       font-size: 30px;
       cursor: pointer;
+      border: 2px solid;
       border-radius: 50%;
-      border: 2px solid white;
+      justify-content: center;
       &.add {
         background-color: rgba(0, 0, 0, 0.6);
       }
@@ -64,7 +62,8 @@ const Container = styled.div`
     margin-top: 26px;
   }
   .desc {
-    font-size: 20px;
+    width: 50%;
+    font-size: 18px;
     line-height: 1.4;
     margin-top: 16px;
   }
