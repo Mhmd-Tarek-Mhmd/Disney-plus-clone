@@ -1,25 +1,20 @@
 import React from "react";
-import { connect } from "react-redux";
 import { Routes, Route } from "react-router-dom";
 
 import Home from "./Home";
 import Login from "./Login";
 import Movie from "./Movie";
+import NotFound from "./NotFound";
 
-function Main({ isAuthed }) {
+export default function Main() {
   return (
     <main>
       <Routes>
+        <Route path="" element={<Home />} />
+        <Route path="/movie/:type/:title" element={<Movie />} />
         <Route path="/login" element={<Login />} />
-        {isAuthed && (
-          <>
-            <Route path="" element={<Home />} />
-            <Route path="/movie/:type/:title" element={<Movie />} />
-          </>
-        )}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </main>
   );
 }
-
-export default connect((state) => ({ isAuthed: state.auth }))(Main);

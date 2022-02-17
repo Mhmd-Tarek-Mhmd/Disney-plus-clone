@@ -9,11 +9,6 @@ import { Navigation, Links, LoginBtn } from "./styles";
 
 function Nav({ isAuthed, signIn, signOut }) {
   const navigate = useNavigate();
-  React.useEffect(
-    () => (!isAuthed ? navigate("/login") : navigate("/")),
-    [isAuthed, navigate]
-  );
-
   const list = React.useRef();
   const linksText = [
     "home",
@@ -34,6 +29,16 @@ function Nav({ isAuthed, signIn, signOut }) {
       list.current.classList.add("mobile-links");
       list.current.parentElement.style.borderBottom = "2px solid white";
     }
+  };
+
+  const handleSignIn = () => {
+    signIn();
+    navigate("/");
+  };
+
+  const handleSignOut = () => {
+    signOut();
+    navigate("/login");
   };
 
   return (
@@ -61,7 +66,7 @@ function Nav({ isAuthed, signIn, signOut }) {
             ))}
           </Links>
 
-          <button aria-label="Logout" onClick={signOut}>
+          <button aria-label="Logout" onClick={handleSignOut}>
             <img
               src="/assists/images/authed-user.png"
               alt="User pic"
@@ -72,7 +77,7 @@ function Nav({ isAuthed, signIn, signOut }) {
       ) : (
         <>
           <Logo />
-          <LoginBtn onClick={signIn}>Login</LoginBtn>
+          <LoginBtn onClick={handleSignIn}>Login</LoginBtn>
         </>
       )}
     </Navigation>
